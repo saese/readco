@@ -1,46 +1,63 @@
-<%= @subtopic.title %>
-<br>
-<%= @subtopic.description %>
-<br>
-<br>
+<div class="wrapper">
+    <div class="box">
+        <div class="row">
+            <div class="column col-sm-12" id="main">
 
-<%= form_for(@link) do |f| %>
-  <% if @link.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@link.errors.count, "error") %> prohibited this link from being saved:</h2>
+                <div class="padding">
+                    <div class="full col-sm-9">
+                      
 
-      <ul>
-      <% @link.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+                        <div class="row">    
+                          <div class="col-sm-10">
+                            <h3><%=@subtopic.title %></h3>
+                            <p><%= @subtopic.description %></p>
+                            <small class="text-muted"><%="#{time_ago_in_words(@subtopic.created_at)} ago"%> •<a href="#" class="text-muted">Read More</a></small>
+                            </h4>
+                          </div>
+                          <div class="col-sm-2">
+<!--                             <a href="#" class="pull-right"><img src="https://si0.twimg.com/profile_images/2184974868/Fh1LUkrI_bigger" class="img-circle"></a> -->
+                          </div> 
+                        </div>
+                        <hr>
 
-  <div class="field">
-  
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
+                        <h4>Links</h3>
+                        <div id = "links">
+                          <%= render "links" %>
+                        </div>
 
-  <div class="field">
+                        <div class="form-box">
+                          <%= form_for(@link, remote: true) do |f| %>
+                            <% if @link.errors.any? %>
+                              <div id="error_explanation">
+                                <h2><%= pluralize(@link.errors.count, "error") %> prohibited this link from being saved:</h2>
 
-    <%= f.label :url %><br />
-    <%= f.text_field :url %>
-  </div>
-   <%= f.hidden_field :subtopic_id, :value => @subtopic.id %>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+                                <ul>
+                                <% @link.errors.full_messages.each do |msg| %>
+                                  <li><%= msg %></li>
+                                <% end %>
+                                </ul>
+                              </div>
+                            <% end %>
 
-<br>
-<br>
-<h2>links:</h2>
-<div>
-  <% @subtopic.links.each do |link| %>
-    <p><%= link.title %></p>
-    <p><%= link.url %></p>
-    
-  <% end %>
-</div>
+
+                            <div class="field form-group">
+                            
+                              <%= f.label :title %><br />
+                              <%= f.text_field :title, class: "form-control" %>
+                            </div>
+
+                            <div class="field form-group">
+
+                              <%= f.label :url %><br />
+                              <%= f.text_field :url, class: "form-control" %>
+                            </div>
+                             <%= f.hidden_field :subtopic_id, :value => @subtopic.id %>
+                            <div class="actions">
+                              <%= f.submit "Submit", class: "actions btn btn-default btn-sm" %>
+                            </div>
+                          <% end %>
+                        </div>
+                        
+                        
+
+

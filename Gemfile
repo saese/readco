@@ -8,6 +8,7 @@ gem 'devise'
 gem 'will_paginate', '~> 3.0'
 gem 'textacular', '~> 3.0'
 gem "twitter-bootstrap-rails"
+gem 'jquery-ui-rails'
 
 group :test do
 	gem 'database_cleaner'

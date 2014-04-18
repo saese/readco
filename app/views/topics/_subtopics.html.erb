@@ -1,0 +1,27 @@
+<% if @topic.subtopics.present?%>
+  <% @topic.subtopics.each do |subtopic| %>
+  <!--/stories-->
+  <div class="row">    
+    <div class="col-sm-10">
+      <h3><%= link_to subtopic.title, subtopic_path(subtopic) %></h3>
+      <p><%= subtopic.description %></p>
+      <small class="text-muted"><%="#{time_ago_in_words(subtopic.topic.created_at)} ago"%></small>
+        <% if subtopic.links.present?%>
+        <h3>Links</h3>
+        <ul id="sortable">
+          <% subtopic.links.each do |link| %>
+            <%= content_tag_for :li, link do %>
+                <h4><%= link.title %></h4>
+                <p><%= link.url %></p>
+            <% end %>
+          <% end %>
+        </ul>
+        <% end %>
+    </div>
+  </div>
+  
+  <div class="row divider">    
+     <div class="col-sm-12"><hr></div>
+  </div>
+  <% end %>
+<% end %>

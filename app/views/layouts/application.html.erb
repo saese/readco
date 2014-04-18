@@ -7,8 +7,24 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<div class="pull-right">
+
+	<%= link_to 'Home', :root %>  | 
+  <%= link_to 'Create new list', new_topic_path %>  | 
+
+	<% if current_user.present? %>
+      <%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %>
+  <% else %>
+    <%= link_to 'Sign In', new_user_session_path %> |
+    <%= link_to 'Register Now!', new_user_registration_path %>
+  <% end %>
+
+	</div>
+
+
    <p class="notice"><%= notice %></p>
    <p class="alert"><%= alert %></p>
+
 
 
 <%= yield %>

@@ -2,86 +2,34 @@
     <div class="box">
         <div class="row">
           
-            <!-- sidebar -->
-            <div class="column col-sm-1" id="sidebar">
-                <a class="logo" href="#">rC</a>
-            </div>
-            <!-- /sidebar -->
-          
-            <!-- main -->
-            <div class="column col-sm-11" id="main">
+            <div class="column col-sm-12" id="main">
 
                 <div class="padding">
                     <div class="full col-sm-9">
                       
-                        <!-- content -->
-                        
-                                              
-                        <div class="col-sm-12" id="stories">  
-                          <div class="page-header text-muted divider">
-                            All Topics
-                          </div>
-                        </div>
 
                         <div class="row">    
                           <div class="col-sm-10">
                             <h3><%=@topic.title %></h3>
                             <h4><span class="label label-default">Ruby on rails</span></h4><h4>
                             <p><%= @topic.description %></p>
-                            <small class="text-muted">1 hour ago • <a href="#" class="text-muted">Read More</a></small>
+                            <small class="text-muted"><%="#{time_ago_in_words(@topic.created_at)} ago"%></small>
                             </h4>
                           </div>
                           <div class="col-sm-2">
 <!--                             <a href="#" class="pull-right"><img src="https://si0.twimg.com/profile_images/2184974868/Fh1LUkrI_bigger" class="img-circle"></a> -->
                           </div> 
                         </div>
+                        <hr>
 
-                        <%= form_for(@subtopic) do |f| %>
-                          <% if @subtopic.errors.any? %>
-                            <div id="error_explanation">
-                              <h2><%= pluralize(@subtopic.errors.count, "error") %> prohibited this subtopic from being saved:</h2>
-
-                              <ul>
-                              <% @subtopic.errors.full_messages.each do |msg| %>
-                                <li><%= msg %></li>
-                              <% end %>
-                              </ul>
-                            </div>
-                          <% end %>
-
-                          <div class="field">
-                          
-                            <%= f.label :title %><br />
-                            <%= f.text_field :title %>
-                          </div>
-
-                          <div class="field">
-
-                            <%= f.label :description %><br />
-                            <%= f.text_area :description %>
-                          </div>
-                           <%= f.hidden_field :topic_id, :value => @topic.id %>
-                          <div class="actions">
-                            <%= f.submit %>
-                          </div>
-                        <% end %>
                         
-                        <% @topic.subtopics.each do |subtopic| %>
-                        <!--/stories-->
-                        <div class="row">    
-                          <div class="col-sm-10">
-                            <h3><%= link_to subtopic.title, subtopic_path(subtopic) %></h3>
-                            <p><%= subtopic.description %></p>
-                            <small class="text-muted">1 hour ago • <a href="#" class="text-muted">Read More</a></small>
-                            </h4>
-                          </div>
+                        <h3>Subtopics</h3>
+                        <div id="subtopics">
+                         <%= render "subtopics" %>
                         </div>
                         
-                        <div class="row divider">    
-                           <div class="col-sm-12"><hr></div>
-                        </div>
-                        <% end %>
-                        
+                          <%= render "shared/subtopic_form" %>
+
                                       
                       
                       
